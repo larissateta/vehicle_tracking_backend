@@ -1,0 +1,232 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Vehicle Tracking",
+        "version": "1.0.0",
+        "description": "API for vehicle Tracking",
+        "contact": {
+            "name": "Larissa Teta",
+            "email": "tetalarissa69@gmail.com"
+        }
+    },
+    "paths": {
+        "/register": {
+            "post": {
+                "summary": "Sign up in vehicle Tracking System",
+                "description": "Endpoint for user registration",
+                "requestBody" :{
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "NID": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["name", "phone", "email", "NID", "password"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200" : {
+                        "description": "Registered Successfully"
+                    },
+                    "400": {
+                        "description": "Failed to Register a user"
+                    }
+                }
+            }
+        }, 
+        "/login" : {
+            "post": {
+                "summary" : "Login Vehicle Tracking",
+                "description": "Endpoint for user login",
+                "requestBody": {
+                    "required": true,
+                    "content" :{
+                        "application/json": {
+                            "schema": {
+                                "type":"object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["email", "password"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Logged in Successfully"
+                    }, 
+                    "400": {
+                        "description": "Failed to Log in"
+                    }
+                }
+            }
+           
+        },
+        "/owner/register": {
+            "post": {
+                "summary": "Register a vehicle owner",
+                "description": "Endpoint for vehicle owner registration",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties":{
+                                    "name": {
+                                        "type":"string"
+                                    },
+                                    "NID": {
+                                        "type":"string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["name", "NID", "phone", "address"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Registered vehicle owner successfully"
+                    },
+                    "400": {
+                        "description": "Failed to register owner"
+                    }, 
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/owner": {
+            "get": {
+                "summary": "Get list of owners",
+                "responses": {
+                    "200": "A list of owners",
+                    "content":{
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+
+                }
+               
+            }
+        },
+        "/cars/register": {
+            "post": {
+                "summary": "Register a vehicle",
+                "description": "Endpoint for vehicle registration",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties":{
+                                    "chasisNumber": {
+                                        "type":"string"
+                                    },
+                                    "manufacturer": {
+                                        "type":"string"
+                                    },
+                                    "manufactureYear": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "string"
+                                    },
+                                    "plateNumber": {
+                                        "type": "string"
+                                    },
+                                    "model": {
+                                        "type": "string"
+                                    },"owner": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["name", "NID", "phone", "address"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Registered vehicle owner successfully"
+                    },
+                    "400": {
+                        "description": "Failed to register owner"
+                    }, 
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/cars": {
+            "get": {
+                "summary": "Get list of owners",
+                "responses": {
+                    "200": "A list of owners",
+                    "content":{
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+
+                }
+               
+            }
+        },
+        "/cars/:carId": {
+            "delete": {
+                "summary": "Delete Car",
+                "responses":{
+                    "200": {
+                        
+                    }
+                }
+            }
+        }
+    }
+}
