@@ -4,7 +4,7 @@ class CarRepo{
     static async save(data){
         return CarModel.create(data);
     }
-    static async getCarByPlate(plateNumber){
+    static async findCarByPlate(plateNumber){
         return CarModel.findOne({plateNumber}).exec();
     }
     static async findAll(){
@@ -12,6 +12,9 @@ class CarRepo{
     }
     static async deleteById(id){
         return CarModel.deleteOne({id}).exec();
+    }
+    static async findCarByTimestamp(timestamp){
+        return CarModel.findOne({timestamp}).exec();
     }
 }
 

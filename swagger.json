@@ -3,17 +3,40 @@
     "info": {
         "title": "Vehicle Tracking",
         "version": "1.0.0",
-        "description": "API for vehicle Tracking",
-        "contact": {
-            "name": "Larissa Teta",
-            "email": "tetalarissa69@gmail.com"
-        }
+        "description": "API for vehicle Tracking"
     },
+    "host": "localhost:4000",
+    "basePath": "/api",
+    "schemes": ["http", "https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "tags": [
+      {
+        "name": "Admin",
+        "description": "Admin operations"
+      },
+      {
+        "name": "Car",
+        "description": "Car operations"
+      },
+      {
+        "name": "Owners",
+        "description": "Owner operations"
+      }
+    ],
     "paths": {
-        "/register": {
+        "api/register": {
             "post": {
                 "summary": "Sign up in vehicle Tracking System",
                 "description": "Endpoint for user registration",
+                "tags": ["Admin"],
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "type":"string"
+                    }
+                ],
                 "requestBody" :{
                     "required": true,
                     "content": {
@@ -48,14 +71,25 @@
                     },
                     "400": {
                         "description": "Failed to Register a user"
+                    },
+                    "404": {
+                        "description": "Not found"
                     }
                 }
             }
         }, 
-        "/login" : {
+        "/api/login" : {
             "post": {
                 "summary" : "Login Vehicle Tracking",
                 "description": "Endpoint for user login",
+                "tags":["Admin"],
+                "parameters":[
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "type": "string"
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content" :{
@@ -86,10 +120,11 @@
             }
            
         },
-        "/owner/register": {
+        "/api/owner/register": {
             "post": {
                 "summary": "Register a vehicle owner",
                 "description": "Endpoint for vehicle owner registration",
+                "tags": ["Owners"],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -128,9 +163,10 @@
                 }
             }
         },
-        "/owner": {
+        "api/owner": {
             "get": {
                 "summary": "Get list of owners",
+                "tags":["Owners"],
                 "responses": {
                     "200": "A list of owners",
                     "content":{
@@ -152,6 +188,7 @@
             "post": {
                 "summary": "Register a vehicle",
                 "description": "Endpoint for vehicle registration",
+                "tags":["Car"],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -201,6 +238,7 @@
         "/cars": {
             "get": {
                 "summary": "Get list of owners",
+                "tags":["Car"],
                 "responses": {
                     "200": "A list of owners",
                     "content":{
@@ -218,12 +256,30 @@
                
             }
         },
-        "/cars/:carId": {
+        "/api/cars/:carId": {
             "delete": {
                 "summary": "Delete Car",
+                "tags": ["Car"],
                 "responses":{
-                    "200": {
-                        
+                    "400":{
+                        "description":"Failed to delete car"
+                    },
+                    "200":{
+                        "description": "Car deleted successfully"
+                    }
+                }
+            }
+        },
+        "/api/owner/:ownerId": {
+            "delete":{
+                "summary": "Delete owner",
+                "tags":["Owners"],
+                "responses":{
+                    "400":{
+                        "description":"Failed to delete owner"
+                    },
+                    "200":{
+                        "description": "Owner deleted successfully"
                     }
                 }
             }

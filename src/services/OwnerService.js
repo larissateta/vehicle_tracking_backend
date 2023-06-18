@@ -10,6 +10,12 @@ class OwnerService{
     static async getAllOwners(){
         return Owner.findAll();
     }
+    static async getOwnerById(id){
+        return Owner.findOwnerById(id);
+    }
+    static async removeOwnerById(id){
+        return Owner.deleteOwnerById(id);
+    }
 }
 
 module.exports = OwnerService

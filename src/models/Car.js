@@ -30,6 +30,10 @@ const CarSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Owner",
         required: true
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now()
     }
 })
 

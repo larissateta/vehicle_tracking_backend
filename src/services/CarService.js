@@ -6,15 +6,17 @@ const CarRepo = require("../Repos/CarRepo")
 
 class CarService {
     static async create(chasisNumber, manufacturer, manufactureYear, price, plateNumber, model, owner){
-        
+    const timestamp = new Date();
+
         const car = new CarModel({
             chasisNumber,
             manufacturer,
             manufactureYear,
             price,
             plateNumber,
-            model,
-            owner
+            model,  
+            owner,
+            timestamp
         })
         const savedOwner = await CarRepo.save(car);
         return savedOwner;
@@ -24,6 +26,9 @@ class CarService {
     }
     static async removeCarById(id){
         return CarRepo.deleteById(id);
+    }
+    static async getCarByTimestamp(timestamp){
+        return CarRepo.findCarByTimestamp(timestamp);
     }
 }
 
