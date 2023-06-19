@@ -9,6 +9,9 @@ router.post('/login',
     check('password', 'password is required').exists()
 ],
 async (req, res, next)=>{
+    // #swagger.tags= ['User'];
+    // #swagger.summary= "User Login";
+    // #swagger.description = "User endpoint";
     const errors = validationResult(req);
     if(!errors.isEmpty()){
         return res.status(400).json({errors: errors})

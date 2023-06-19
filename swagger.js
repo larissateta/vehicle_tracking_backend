@@ -1,16 +1,63 @@
-const swaggerjsdoc = require("swagger-jsdoc");
+const swaggerAutogen = require('swagger-autogen')();
 
-const options = {
-    swaggerDefinition: {
-        openapi: '3.0.0',
-        info: {
-            title: "Vehicle Tracking System API",
-            version: "1.0.0",
-            description: "APIs for tracking system"
-        },
+
+const outputFile = './swagger_output.json';
+const authRoutes =["./src/routes/index.js"]
+
+const doc = {
+  info: {
+    title: 'API documentations',
+    description: 'API documentation',
+    version: '1.0.0',
+  },
+  securityDefinitions: {
+    BearerAuth: {
+      type: "apiKey",
+      name: "Authorization",
+      in: "header",
     },
-    apis: ['./src/routes/*.js'],
+  },
+  security: [
+    {
+      BearerAuth: [],
+    },
+  ],
+  host: 'localhost:4000',
+  basePath: '/api',
+  schemes: ['http'], 
+  consumes: ['application/json'],
+  produces: ['application/json'],
+  tags: [
+    {
+      name: "User",
+      description: "User endpoint",
+    },
+    {
+      name: "Car",
+      description: "Car endpoint",
+    },
+    {
+      name: "Owner",
+      description: "Owner endpoint",
+    },
+  ],
+  components: {
+    securitySchemas: {
+      bearerAuth: {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT",
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ]
+  }
+  
 }
 
-const specs = swaggerjsdoc(options);
-module.exports = specs
+swaggerAutogen(outputFile, authRoutes, doc).then(()=>{
+  require('./server')
+});

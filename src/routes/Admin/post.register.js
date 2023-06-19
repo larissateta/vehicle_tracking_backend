@@ -13,6 +13,9 @@ router.post('/register',
     check('password', 'password is required').isLength({min: 6})
 ],
 async (req, res, next)=>{
+    // #swagger.tags= ['User'];
+    // #swagger.summary= "Register User";
+    // #swagger.description = "User endpoint";
     const errors = validationResult(req);
     console.log(req.body); // Log the request body
     if(!errors.isEmpty()){
